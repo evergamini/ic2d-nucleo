@@ -537,6 +537,9 @@ void App::handle_cmd_start_loop(uint8_t *payload) {
   // sending the payload
   send(com::Type::ACK, payload, 1, true);
 
+  // set duration time
+  hw->set_duration_time(params[1]);
+  
   // start the control loop
   exec_control_loop(params[0], params[1]);
 
