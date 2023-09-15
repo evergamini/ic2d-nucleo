@@ -49,7 +49,7 @@ forecast::Status forecast::Hardware::init() {
   if (not pressureSensorTInit())
     return Status::PRESSURE_SENSOR_T_INIT_ERR;
 
-  load_cell2_sensor = new AnalogInput(PC_1);
+  //load_cell2_sensor = new AnalogInput(PC_1);
   
   lowPassTauSensor = utility::AnalogFilter::getLowPassFilterHz(2.0f);
   lowPassTauSensor->clean();
@@ -122,66 +122,70 @@ bool forecast::Hardware::motorEnvironmentInit() {
 bool forecast::Hardware::torqueSensorInit() {
   torque_sensor =
       new AnalogInput(TORQUE_SENSOR_PIN, ADC_PCLK2, ADC_Right, ADC_15s, ADC_12b,
-                      ADC_Continuous, ADC_Dma, TORQUE_SENSOR_BUFFER_SIZE);
+                      ADC_Continuous, ADC_Dma, DMA_BUFFER_SIZE);
 
   /* Enable the ADC - In continous mode the ADC start is done automatically */
-  auto enabled = torque_sensor->enable();
-  tauSensorOffset = torque_sensor->read_average_float() * 3.3f;
+  //auto enabled = torque_sensor->enable();
+  //tauSensorOffset = torque_sensor->read_average_float() * 3.3f;
 
-  return enabled == -1 ? false : true;
+  return true;
   }
-/*
+
   bool forecast::Hardware::torqueSensor2Init() {
   load_cell2_sensor =
       new AnalogInput(TORQUE_SENSOR_2_PIN, ADC_PCLK2, ADC_Right, ADC_15s, ADC_12b,
-                      ADC_Continuous, ADC_Dma, TORQUE_SENSOR_2_BUFFER_SIZE);
+                      ADC_Continuous, ADC_Dma, DMA_BUFFER_SIZE);
 
-  /* Enable the ADC - In continous mode the ADC start is done automatically *//*
-  auto enabled = load_cell2_sensor->enable();
-  tauSOffset = load_cell2_sensor->read_average_float() * 3.3f;
+  /* Enable the ADC - In continous mode the ADC start is done automatically */
+  //auto enabled = load_cell2_sensor->enable();
+  //tauSOffset = load_cell2_sensor->read_average_float() * 3.3f;
 
-  return enabled == -1 ? false : true;
+  return true;
 }
-*/
+
 
 bool forecast::Hardware::pressureSensorAInit() {
   pressure_sensor_a =
-      new AnalogInput(PRESSURE_SENSOR_A_PIN);
+      new AnalogInput(PRESSURE_SENSOR_A_PIN, ADC_PCLK2, ADC_Right, ADC_15s, ADC_12b,
+                      ADC_Continuous, ADC_Dma, DMA_BUFFER_SIZE);
 
   /* Enable the ADC - In continous mode the ADC start is done automatically */
-  auto enabled = pressure_sensor_a->enable();
+  //auto enabled = pressure_sensor_a->enable();
 
-  return enabled == -1 ? false : true;
+  return true;
 }
 
 bool forecast::Hardware::pressureSensorBInit() {
   pressure_sensor_b =
-      new AnalogInput(PRESSURE_SENSOR_B_PIN);
+      new AnalogInput(PRESSURE_SENSOR_B_PIN, ADC_PCLK2, ADC_Right, ADC_15s, ADC_12b,
+                      ADC_Continuous, ADC_Dma, DMA_BUFFER_SIZE);
 
   /* Enable the ADC - In continous mode the ADC start is done automatically */
-  auto enabled = pressure_sensor_b->enable();
+  //auto enabled = pressure_sensor_b->enable();
 
-  return enabled == -1 ? false : true;
+  return true;
 }
 
 bool forecast::Hardware::pressureSensorSInit() {
   pressure_sensor_s =
-      new AnalogInput(PRESSURE_SENSOR_S_PIN);
+      new AnalogInput(PRESSURE_SENSOR_S_PIN, ADC_PCLK2, ADC_Right, ADC_15s, ADC_12b,
+                      ADC_Continuous, ADC_Dma, DMA_BUFFER_SIZE);
 
   /* Enable the ADC - In continous mode the ADC start is done automatically */
-  auto enabled = pressure_sensor_s->enable();
+ // auto enabled = pressure_sensor_s->enable();
 
-  return enabled == -1 ? false : true;
+  return true;
 }
 
 bool forecast::Hardware::pressureSensorTInit() {
   pressure_sensor_t =
-      new AnalogInput(PRESSURE_SENSOR_T_PIN);
+      new AnalogInput(PRESSURE_SENSOR_T_PIN, ADC_PCLK2, ADC_Right, ADC_15s, ADC_12b,
+                      ADC_Continuous, ADC_Dma, DMA_BUFFER_SIZE);
 
   /* Enable the ADC - In continous mode the ADC start is done automatically */
   auto enabled = pressure_sensor_t->enable();
 
-  return enabled == -1 ? false : true;
+  return true;
 }
 
 
